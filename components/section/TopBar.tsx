@@ -27,7 +27,7 @@ export default function TopBar({ session }: { session: Session | null }) {
             </div>
             <ActionButton
               text={"Sign Out"}
-              loadingText={"signing out.."}
+              loadingText={"Signing out.."}
               formAction={async () => {
                 "use server";
                 await signOut();
