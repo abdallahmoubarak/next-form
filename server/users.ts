@@ -1,4 +1,5 @@
 "use server";
+import { v4 as uuidv4 } from "uuid";
 
 import { revalidatePath } from "next/cache";
 
@@ -10,10 +11,25 @@ export async function getUsers() {
 
 export async function addUser(formdata: FormData) {
   try {
-    users.push(formdata.get("username"));
+    users.push({ id: uuidv4(), name: formdata.get("username") });
     revalidatePath("/");
-  } catch (e) {
-    console.log(e);
+    return { success: true };
+  } catch (e: any) {
+    return {
+      error: e.message,
+    };
+  }
+}
+
+export async function deleteUser({ id }: { id: string }) {
+  try {
+    users = users.filter((user) => user.id !== id);
+    revalidatePath("/");
+    return { success: true };
+  } catch (e: any) {
+    return {
+      error: e.message,
+    };
   }
 }
 
@@ -21,7 +37,10 @@ export async function removeUsers() {
   try {
     users = [];
     revalidatePath("/");
-  } catch (e) {
-    console.log(e);
+    return { success: true };
+  } catch (e: any) {
+    return {
+      error: e.message,
+    };
   }
 }
