@@ -3,15 +3,15 @@ import { v4 as uuidv4 } from "uuid";
 
 import { revalidatePath } from "next/cache";
 
-let users: any[] = [];
+let todos: any[] = [];
 
-export async function getUsers() {
-  return users;
+export async function getToDos() {
+  return todos;
 }
 
-export async function addUser(formdata: FormData) {
+export async function addToDo(formdata: FormData) {
   try {
-    users.push({ id: uuidv4(), name: formdata.get("username") });
+    todos.push({ id: uuidv4(), text: formdata.get("todo") });
     revalidatePath("/");
     return { success: true };
   } catch (e: any) {
@@ -21,9 +21,9 @@ export async function addUser(formdata: FormData) {
   }
 }
 
-export async function deleteUser({ id }: { id: string }) {
+export async function deleteToDo({ id }: { id: string }) {
   try {
-    users = users.filter((user) => user.id !== id);
+    todos = todos.filter((todo) => todo.id !== id);
     revalidatePath("/");
     return { success: true };
   } catch (e: any) {
@@ -33,9 +33,9 @@ export async function deleteUser({ id }: { id: string }) {
   }
 }
 
-export async function removeUsers() {
+export async function removeToDos() {
   try {
-    users = [];
+    todos = [];
     revalidatePath("/");
     return { success: true };
   } catch (e: any) {

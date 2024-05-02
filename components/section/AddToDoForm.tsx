@@ -1,50 +1,53 @@
 "use client";
-import { addUser, removeUsers } from "@/server/users";
+import { addToDo, removeToDos } from "@/server/todos";
 import { ActionButton } from "../atom/ActionButton";
 import toast from "react-hot-toast";
 import { useRef } from "react";
 
-export default function AddUserForm() {
+export default function AddToDoForm() {
   const ref = useRef<HTMLFormElement>(null);
-  const handleAddUser = async (formData: FormData) => {
-    if (!!formData.get("username")) {
-      const res = await addUser(formData);
+  const handleAddToDo = async (formData: FormData) => {
+    if (!!formData.get("todo")) {
+      const res = await addToDo(formData);
       res?.error
         ? toast.error(res?.error)
-        : toast.success("User added successfully");
+        : toast.success("ToDo added successfully");
 
       !res?.error && ref.current?.reset();
     } else {
-      toast.error("Add Username");
+      toast.error("Add ToDo");
     }
   };
-  const handleRemoveUsers = async () => {
-    const res = await removeUsers();
+  const handleRemoveToDos = async () => {
+    const res = await removeToDos();
     res?.error
       ? toast.error(res?.error)
-      : toast.success("Users removed successfully");
+      : toast.success("ToDos removed successfully");
 
     !res?.error && ref.current?.reset();
   };
 
   return (
-    <form ref={ref} className="flex flex-wrap p-2 gap-4" action={handleAddUser}>
+    <form
+      ref={ref}
+      className="flex flex-wrap py-2 gap-4"
+      action={handleAddToDo}>
       <input
         className="border border-gray-300 rounded-md flex-1 py-2 px-3"
         type="text"
-        name="username"
-        placeholder="User Name"
+        name="todo"
+        placeholder="To Do"
       />
       <div className="flex gap-4">
         <ActionButton
           isPrimary={true}
-          text="Add User"
+          text="Add Todo"
           loadingText="Loading.."
         />
         <ActionButton
           text={"reset"}
           loadingText="Loading.."
-          formAction={handleRemoveUsers}
+          formAction={handleRemoveToDos}
         />
       </div>
     </form>
