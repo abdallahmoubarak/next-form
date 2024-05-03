@@ -2,7 +2,7 @@ import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { ActionButton } from "../atom/ActionButton";
-import { signOut } from "@/auth";
+import { signIn, signOut } from "@/auth";
 
 export default function TopBar({ session }: { session: Session | null }) {
   return (
@@ -36,13 +36,17 @@ export default function TopBar({ session }: { session: Session | null }) {
           </div>
         </form>
       ) : (
-        <Link href={"/api/auth/signin"}>
+        <form>
           <ActionButton
-            text="Sign in"
+            text="Sign In"
             isPrimary={true}
             loadingText="Signing.."
+            formAction={async () => {
+              "use server";
+              await signIn("google");
+            }}
           />
-        </Link>
+        </form>
       )}
     </div>
   );
