@@ -6,6 +6,7 @@ export default async function SignWithGoogleForm() {
   const session = await auth();
 
   !!session && redirect("/");
+
   return (
     <form className="py-4">
       <div className="text-center p-4">or</div>
