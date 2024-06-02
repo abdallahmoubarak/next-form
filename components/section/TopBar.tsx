@@ -48,9 +48,11 @@ export default function TopBar({ session }: { session: Session | null }) {
         //     }}
         //   />
         // </form>
-        <Link href={"/login"} prefetch>
-          <Button isPrimary text="Log In" />
-        </Link>
+        <form>
+          <Link href={"/login"} prefetch>
+            <Button isPrimary text="Log In" isLinked />
+          </Link>
+        </form>
       )}
     </div>
   );
