@@ -1,7 +1,7 @@
 import { DragControls } from "framer-motion";
 
 interface Props {
-  dragControls: DragControls;
+  dragControls?: DragControls;
 }
 
 export function ReorderIcon({ dragControls }: Props) {
@@ -11,7 +11,7 @@ export function ReorderIcon({ dragControls }: Props) {
       viewBox="0 0 39 39"
       width="100%"
       height="100%"
-      onPointerDown={(event) => dragControls.start(event)}>
+      onPointerDown={(event) => dragControls?.start(event)}>
       <path
         d="M 5 0 C 7.761 0 10 2.239 10 5 C 10 7.761 7.761 10 5 10 C 2.239 10 0 7.761 0 5 C 0 2.239 2.239 0 5 0 Z"
         fill="#CCC"></path>

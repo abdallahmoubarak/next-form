@@ -3,7 +3,8 @@ import AddToDoForm from "@/components/section/AddToDoForm";
 import TopBar from "@/components/section/TopBar";
 import ToDoList from "@/components/section/ToDoList";
 import { SessionProvider } from "next-auth/react";
-import ReorderList from "@/components/section/ReorderList";
+import ReorderList, { initialItems } from "@/components/section/ReorderList";
+import { SortableList } from "@/components/section/SortableList";
 
 export default async function Home() {
   const session = await auth();
@@ -15,6 +16,7 @@ export default async function Home() {
         <ToDoList />
         <AddToDoForm />
         {!!session && <ReorderList />}
+        <SortableList initialList={initialItems} />
       </div>
     </SessionProvider>
   );

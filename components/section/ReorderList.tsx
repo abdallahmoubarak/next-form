@@ -3,7 +3,12 @@ import { Reorder } from "framer-motion";
 import { useState } from "react";
 import { Item } from "./ReorderItem";
 
-const initialItems = ["🍅 Tomato", "🥒 Cucumber", "🧀 Cheese", "🥬 Lettuce"];
+export const initialItems = [
+  "🍅 Tomato",
+  "🥒 Cucumber",
+  "🧀 Cheese",
+  "🥬 Lettuce",
+];
 
 export default function ReorderList() {
   const [items, setItems] = useState(initialItems);
