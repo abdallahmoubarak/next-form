@@ -11,9 +11,9 @@ export const SortableList = ({ initialList }: any) => {
       list={list}
       setList={setList}
       className="relative flex flex-col gap-4 py-4">
-      {list?.map((item: string) => (
+      {list?.map((item: string, i: number) => (
         <div
-          key={item}
+          key={i}
           className="relative bg-slate-100 border border-slate-300 rounded-md flex">
           <span className="w-12 cursor-move p-3">
             <ReorderIcon />
