@@ -22,10 +22,16 @@ export default async function Home() {
 }
 
 export const initialItems = [
-  <Link href={"/about"} className="bg-red">
+  <Link href={"/Tomato"} className="bg-red">
     🍅 Tomato
   </Link>,
-  "🥒 Cucumber",
-  "🧀 Cheese",
-  "🥬 Lettuce",
+  <Link href={"/Cucumber"} className="bg-red">
+    🥒 Cucumber
+  </Link>,
+  <Link href={"/Cheese"} className="bg-red">
+    🧀 Cheese
+  </Link>,
+  <Link href={"/Lettuce"} className="bg-red">
+    🥬 Lettuce
+  </Link>,
 ];
