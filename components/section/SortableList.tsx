@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { ReorderIcon } from "./Icon";
-import Link from "next/link";
 import { initialItems } from "@/public/initialItems";
+import Card from "@/components/atom/Card";
 
 export const SortableList = () => {
   const [list, setList] = useState(initialItems);
@@ -22,9 +22,13 @@ export const SortableList = () => {
           <span className="w-12 cursor-move p-3">
             <ReorderIcon />
           </span>
-          <Link href={item?.link} className="p-4">
-            {item?.name}
-          </Link>
+          <Card
+            imageUrl={""}
+            name={item?.name}
+            price={item?.price}
+            value={""}
+            link={item?.link}
+          />
         </div>
       ))}
     </ReactSortable>
