@@ -11,14 +11,14 @@ export const SortableList = ({ initialList }: any) => {
       list={list}
       setList={setList}
       className="relative flex flex-col gap-4 py-4">
-      {list.map((item: string) => (
+      {list?.map((item: string) => (
         <div
           key={item}
-          className="relative bg-slate-100 border border-slate-300 rounded-md flex gap-4 p-4">
-          <span className="w-6">
+          className="relative bg-slate-100 border border-slate-300 rounded-md flex">
+          <span className="w-12 cursor-move p-3">
             <ReorderIcon />
           </span>
-          <span>{item}</span>
+          <span className="p-4">{item}</span>
         </div>
       ))}
     </ReactSortable>

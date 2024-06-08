@@ -16,7 +16,7 @@ export const Item = ({ item }: Props) => {
       dragListener={false}
       dragControls={dragControls}
       className="relative bg-slate-100 border border-slate-300 rounded-md flex gap-4 p-4">
-      <span className="w-6">
+      <span className="w-6 cursor-move">
         <ReorderIcon dragControls={dragControls} />
       </span>
       <span>{item}</span>
