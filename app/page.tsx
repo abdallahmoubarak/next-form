@@ -4,7 +4,6 @@ import TopBar from "@/components/section/TopBar";
 import ToDoList from "@/components/section/ToDoList";
 import { SessionProvider } from "next-auth/react";
 import { SortableList } from "@/components/section/SortableList";
-import Link from "next/link";
 
 export default async function Home() {
   const session = await auth();
@@ -15,23 +14,37 @@ export default async function Home() {
         <TopBar session={session} />
         <ToDoList />
         <AddToDoForm />
-        <SortableList initialList={initialItems} />
+        <SortableList />
       </div>
     </SessionProvider>
   );
 }
 
-export const initialItems = [
-  <Link href={"/Tomato"} className="bg-red">
-    🍅 Tomato
-  </Link>,
-  <Link href={"/Cucumber"} className="bg-red">
-    🥒 Cucumber
-  </Link>,
-  <Link href={"/Cheese"} className="bg-red">
-    🧀 Cheese
-  </Link>,
-  <Link href={"/Lettuce"} className="bg-red">
-    🥬 Lettuce
-  </Link>,
+export interface ItemType {
+  id: number;
+  name: string;
+  link: string;
+}
+
+export const initialItems: ItemType[] = [
+  {
+    id: 1,
+    name: "🍅 Tomato",
+    link: "/tomato",
+  },
+  {
+    id: 2,
+    name: "🥒 Cucumber",
+    link: "/cucumber",
+  },
+  {
+    id: 3,
+    name: "🧀 Cheese",
+    link: "/cheese",
+  },
+  {
+    id: 4,
+    name: "🥬 Lettuce",
+    link: "/lettuce",
+  },
 ];
