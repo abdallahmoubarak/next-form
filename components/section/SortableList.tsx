@@ -3,35 +3,7 @@ import { useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { ReorderIcon } from "./Icon";
 import Link from "next/link";
-
-export interface ItemType {
-  id: number;
-  name: string;
-  link: string;
-}
-
-export const initialItems: ItemType[] = [
-  {
-    id: 1,
-    name: "🍅 Tomato",
-    link: "/tomato",
-  },
-  {
-    id: 2,
-    name: "🥒 Cucumber",
-    link: "/cucumber",
-  },
-  {
-    id: 3,
-    name: "🧀 Cheese",
-    link: "/cheese",
-  },
-  {
-    id: 4,
-    name: "🥬 Lettuce",
-    link: "/lettuce",
-  },
-];
+import { initialItems } from "@/public/initialItems";
 
 export const SortableList = () => {
   const [list, setList] = useState(initialItems);
