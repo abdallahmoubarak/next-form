@@ -12,7 +12,6 @@ const providers: Provider[] = [
   Credentials({
     authorize: async (credentials) => {
       connectDB();
-      console.log(credentials);
       let user = null;
       try {
         const { email, password } = await signInSchema.parseAsync(credentials);

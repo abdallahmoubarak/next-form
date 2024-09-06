@@ -11,7 +11,7 @@ export default async function SignWithGoogleForm() {
     <form className="py-4">
       <div className="text-center p-4">or</div>
       <Button
-        text={"Sign with Google"}
+        text={"Continue with Google"}
         formAction={async () => {
           "use server";
           await signIn("google");

@@ -1,6 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 export interface UserDocument {
   _id: string;
+  name: string;
   email: string;
   password: string;
   createdAt: Date;
@@ -8,6 +9,7 @@ export interface UserDocument {
 }
 const userSchema = new Schema<UserDocument>(
   {
+    name: { type: String },
     email: {
       type: String,
       unique: true,
@@ -22,7 +24,7 @@ const userSchema = new Schema<UserDocument>(
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const User = mongoose.models?.User || model<UserDocument>("User", userSchema);

@@ -28,10 +28,7 @@ export default function AddToDoForm() {
   };
 
   return (
-    <form
-      ref={ref}
-      className="flex flex-wrap py-2 gap-4"
-      action={handleAddToDo}>
+    <form ref={ref} className="flex flex-wrap py-2 gap-4">
       <input
         className="border border-gray-300 rounded-md flex-1 py-2 px-3"
         type="text"
@@ -42,6 +39,7 @@ export default function AddToDoForm() {
         <ActionButton
           isPrimary={true}
           text="Add Todo"
+          formAction={handleAddToDo}
           loadingText="Loading.."
         />
         <ActionButton
