@@ -1,3 +1,4 @@
+"use server";
 import { Provider } from "next-auth/providers";
 import Credentials from "next-auth/providers/credentials";
 import User from "@/models/user";
