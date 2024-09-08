@@ -6,6 +6,7 @@ import { signInSchema } from "./utils/zod";
 import bcrypt from "bcryptjs";
 import { connectDB } from "./utils/mongodb";
 import GoogleProvider from "next-auth/providers/google";
+import { z } from "zod";
 
 const providers: Provider[] = [
   GoogleProvider,
@@ -17,14 +18,20 @@ const providers: Provider[] = [
         const { email, password } = await signInSchema.parseAsync(credentials);
         user = await User.findOne({ email });
         console.log(user);
-        if (!user) throw new Error("Wrong Email");
+        if (!user) throw new Error("Wrong Email or Password");
 
         const passwordsMatch = await bcrypt.compare(password, user?.password);
-        if (passwordsMatch) return user;
+        if (!passwordsMatch) throw new Error("Wrong Email or Password");
+        return user;
       } catch (err: any) {
+        if (err instanceof z.ZodError) {
+          const validationErrors = err.issues.map(
+            (issue: { message: any }) => issue.message
+          );
+          throw new Error(validationErrors[0]);
+        }
         throw new Error(err.message);
       }
-      return user;
     },
   }),
 ];
@@ -35,11 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: { signIn: "/login" },
   providers,
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
     authorized: async ({ auth }) => {
-      // Logged in users are authenticated, otherwise redirect to login page
       return !!auth;
     },
   },

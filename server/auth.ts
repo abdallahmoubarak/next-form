@@ -4,13 +4,25 @@ import User from "@/models/user";
 import { hashPassword } from "@/utils/jwt";
 import { connectDB } from "@/utils/mongodb";
 import { signUpSchema } from "@/utils/zod";
+import { redirect } from "next/navigation";
 
 export const handleLogIn = async (formData: FormData) => {
   "use server";
   try {
-    await signIn("credentials", formData);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/",
+      redirect: false,
+    }).then(() => redirect("/"));
   } catch (err: any) {
-    console.log(err.message);
+    err?.message === "NEXT_REDIRECT" && redirect("/");
+    err?.cause?.err?.message
+      ? redirect(`/login?err=${err?.cause?.err?.message}`)
+      : redirect("/login?err=Unknown Error");
   }
 };
 
@@ -24,7 +36,6 @@ export const handleSignUp = async (formData: FormData) => {
   try {
     await signUpSchema.parseAsync({ name, email, password });
     const hashedPassword = await hashPassword(password.toString());
-    console.log({ name, email, hashedPassword });
     let user = await User.findOne({ email });
 
     if (!user) {
@@ -34,7 +45,6 @@ export const handleSignUp = async (formData: FormData) => {
         password: hashedPassword,
       });
     }
-    console.log(user);
   } catch (err: any) {
     console.log(err.message);
   }

@@ -1,6 +1,6 @@
 "use client";
 import { deleteToDo } from "@/server/todos";
-import { ActionButton } from "../atom/ActionButton";
+import ActionButton from "@/components/atom/ActionButton";
 import toast from "react-hot-toast";
 
 export default function DeleteToDoForm({ id }: { id: string }) {

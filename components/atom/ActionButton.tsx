@@ -2,7 +2,7 @@
 
 import { useFormStatus } from "react-dom";
 
-export function ActionButton({
+export default function ActionButton({
   text,
   loadingText,
   formAction,
@@ -22,7 +22,8 @@ export function ActionButton({
       } rounded-md text-white py-2 px-4`}
       type="submit"
       formAction={formAction}
-      disabled={pending}>
+      disabled={pending}
+    >
       {pending ? loadingText : text}
     </button>
   );

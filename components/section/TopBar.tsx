@@ -1,7 +1,7 @@
 import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { ActionButton } from "../atom/ActionButton";
+import ActionButton from "@/components/atom/ActionButton";
 import { signOut } from "@/auth";
 import Button from "../atom/Button";
 
@@ -31,7 +31,7 @@ export default function TopBar({ session }: { session: Session | null }) {
               loadingText={"Signing out.."}
               formAction={async () => {
                 "use server";
-                await signOut();
+                await signOut({ redirectTo: "/login" });
               }}
             />
           </div>

@@ -1,3 +1,4 @@
+"use server";
 import { auth, signIn } from "@/auth";
 import Button from "../atom/Button";
 import { redirect } from "next/navigation";
