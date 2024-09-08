@@ -12,8 +12,6 @@ const providers: Provider[] = [
   GoogleProvider,
   Credentials({
     authorize: async (credentials) => {
-      "use server";
-      connectDB();
       let user = null;
       try {
         const { email, password } = await signInSchema.parseAsync(credentials);
