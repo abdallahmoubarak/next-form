@@ -1,10 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  unstable_allowDynamic: [
-    "./auth.config.ts",
-    "./lib/models/user.model.ts",
-    "./node_modules/mongoose/dist/browser.umd.js",
-  ],
   images: {
     remotePatterns: [
       {
