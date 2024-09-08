@@ -37,5 +37,6 @@ const providers: Provider[] = [
 ];
 
 export default {
+  secret: process.env.AUTH_SECRET,
   providers,
 } satisfies NextAuthConfig;
