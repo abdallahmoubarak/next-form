@@ -26,7 +26,7 @@ export default async function LoginForm() {
           </div>
         </div>
         <div>
-          <span className="text-sm">You Don't have an account?</span>{" "}
+          <span className="text-sm">You Don&apos;t have an account?</span>{" "}
           <Link href={"/login?signup=true"} className="underline">
             Register
           </Link>
