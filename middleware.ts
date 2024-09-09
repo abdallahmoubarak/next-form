@@ -11,7 +11,6 @@ const authRoutes = ["/login", "/signup"];
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
-  ("use server");
   const session = await auth();
 
   if (isProtectedRoute && !session) {

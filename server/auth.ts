@@ -8,6 +8,8 @@ import { redirect } from "next/navigation";
 
 export const handleLogIn = async (formData: FormData) => {
   "use server";
+  connectDB();
+
   try {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;

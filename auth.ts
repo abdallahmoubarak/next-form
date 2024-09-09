@@ -4,7 +4,6 @@ import Credentials from "next-auth/providers/credentials";
 import User from "@/models/user";
 import { signInSchema } from "./utils/zod";
 import bcrypt from "bcryptjs";
-import { connectDB } from "./utils/mongodb";
 import GoogleProvider from "next-auth/providers/google";
 import { z } from "zod";
 
@@ -12,7 +11,6 @@ const providers: Provider[] = [
   GoogleProvider,
   Credentials({
     authorize: async (credentials) => {
-      connectDB();
       let user = null;
       try {
         const { email, password } = await signInSchema.parseAsync(credentials);
