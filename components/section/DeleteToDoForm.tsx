@@ -1,5 +1,5 @@
 "use client";
-import { deleteToDo } from "@/server/todos";
+import { deleteToDo } from "@/actions/todos";
 import ActionButton from "@/components/atom/ActionButton";
 import toast from "react-hot-toast";
 

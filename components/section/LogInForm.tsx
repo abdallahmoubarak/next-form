@@ -1,6 +1,6 @@
 import Input from "@/components/atom/Input";
 import SignWithGoogleForm from "./SignWithGoogleForm";
-import { handleLogIn } from "@/server/auth";
+import { handleLogIn } from "@/actions/auth";
 import Link from "next/link";
 import Button from "../atom/Button";
 

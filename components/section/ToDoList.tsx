@@ -1,4 +1,4 @@
-import { getToDos } from "@/server/todos";
+import { getToDos } from "@/actions/todos";
 import DeleteToDoForm from "./DeleteToDoForm";
 
 export default async function ToDoList() {

@@ -1,7 +1,7 @@
 import Button from "@/components/atom/Button";
 import Input from "@/components/atom/Input";
 import SignWithGoogleForm from "./SignWithGoogleForm";
-import { handleSignUp } from "@/server/auth";
+import { handleSignUp } from "@/actions/auth";
 import Link from "next/link";
 
 export default async function SignUpForm({ err }: { err?: string }) {

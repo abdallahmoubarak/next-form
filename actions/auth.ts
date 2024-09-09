@@ -5,6 +5,7 @@ import { hashPassword } from "@/utils/jwt";
 import { connectDB } from "@/utils/mongodb";
 import { signUpSchema } from "@/utils/zod";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
 export const handleLogIn = async (formData: FormData) => {
   "use server";
@@ -46,8 +47,31 @@ export const handleSignUp = async (formData: FormData) => {
         email,
         password: hashedPassword,
       });
+      await signIn("credentials", {
+        email,
+        password,
+        redirectTo: "/",
+        redirect: false,
+      }).then(() => redirect("/"));
+    } else {
+      throw new Error("You are already registered, try to login instead.");
     }
   } catch (err: any) {
-    console.log(err.message);
+    let msg;
+    if (err instanceof z.ZodError) {
+      const validationErrors = err.issues.map(
+        (issue: { message: any }) => issue.message
+      );
+      msg = validationErrors[0];
+    } else if (err?.cause?.err?.message) {
+      msg = err?.cause?.err?.message;
+    } else {
+      msg = err.message;
+    }
+
+    msg === "NEXT_REDIRECT" && redirect("/");
+    msg
+      ? redirect(`/login?signup=true&err=${msg}`)
+      : redirect("/login?signup=true&err=Unknown Error");
   }
 };

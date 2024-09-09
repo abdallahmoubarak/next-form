@@ -1,21 +1,20 @@
 import NextAuth from "next-auth";
 import { Provider } from "next-auth/providers";
 import Credentials from "next-auth/providers/credentials";
-import User from "@/models/user";
 import { signInSchema } from "./utils/zod";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
 import { z } from "zod";
+import getUserByEmail from "./actions/getUserByEmail";
 
 const providers: Provider[] = [
   GoogleProvider,
   Credentials({
     authorize: async (credentials) => {
-      let user = null;
       try {
         const { email, password } = await signInSchema.parseAsync(credentials);
-        user = await User.findOne({ email });
-        console.log(user);
+        const user = await getUserByEmail({ email });
+
         if (!user) throw new Error("Wrong Email or Password");
 
         const passwordsMatch = await bcrypt.compare(password, user?.password);
