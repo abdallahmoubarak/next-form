@@ -5,7 +5,7 @@ import { signInSchema } from "./utils/zod";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
 import { z } from "zod";
-import User from "./models/user";
+import getUserbyEmail from "./actions/getUserbyEmail";
 
 const providers: Provider[] = [
   GoogleProvider,
@@ -14,7 +14,7 @@ const providers: Provider[] = [
       try {
         const { email, password } = await signInSchema.parseAsync(credentials);
 
-        const user = await User.findOne({ email });
+        const user = await getUserbyEmail({ email });
 
         if (!user) throw new Error("Wrong Email or Password");
 
