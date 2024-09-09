@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { auth } from "./auth";
+import NextAuth from "next-auth";
+import authConfig from "./auth.config";
+
+const { auth } = NextAuth(authConfig);
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image).*)"],
@@ -8,19 +10,20 @@ export const config = {
 const protectedRoutes = ["/"];
 const authRoutes = ["/login", "/signup"];
 
-export default async function middleware(req: NextRequest) {
-  const path = req.nextUrl.pathname;
+export default auth((req) => {
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
+  const path = nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
-  const session = await auth();
 
-  if (isProtectedRoute && !session) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl));
+  if (isProtectedRoute && !isLoggedIn) {
+    return Response.redirect(new URL("/login", req.nextUrl));
   }
 
   const isAuthRoute = authRoutes.includes(path);
-  if (isAuthRoute && session) {
-    return NextResponse.redirect(new URL("/", req.nextUrl));
+  if (isAuthRoute && isLoggedIn) {
+    return Response.redirect(new URL("/", req.nextUrl));
   }
 
-  return NextResponse.next();
-}
+  return;
+});
